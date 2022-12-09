@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>회원가입</title>
+        <script src="./join.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <div>
+            <form action="./join.php" method="post">
+                <table>
+                    <tr>
+                        <td>사용자 ID</td>
+                        <td>
+                            <input id="id" type="text" required>
+                            <button id="id_check" onclick="checkId(id)">ID 중복확인</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>비밀번호</td>
+                        <td>
+                            <input id="pw" type="password" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>비밀번호 확인</td>
+                        <td>
+                            <input id="pw_check" type="password" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>성명</td>
+                        <td>
+                            <input id="name" type="text" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>E-mail</td>
+                        <td>
+                            <input id="email" type="email" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>우편번호</td>
+                        <td>
+                            <input id="post_num1" type="number" readonly>
+                            -
+                            <input id="post_num2" type="number" readonly>
+                            <button onclick="" id="search_post">우편번호 검색</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>주소</td>
+                        <td>
+                            <input id="addr1" type="text" required><br>
+                            <input id="addr2" type="text"  required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>휴대폰 번호</td>
+                        <td>
+                            <input id="phone1" type="number" maxlength="3" required>
+                            -<input id="phone2" type="number" maxlength="4" required>
+                            -<input id="phone3" type="number" maxlength="4" required>
+                        </td>
+                    </tr>
+                </table>
+                <input type="submit" title="확인">
+            </form>
+        </div>
+    </body>
+</html>
