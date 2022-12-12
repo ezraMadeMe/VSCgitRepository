@@ -1,72 +1,89 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>회원가입</title>
-        <script src="./join.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    </head>
-    <body>
-        <div>
-            <form action="./join.php" method="post">
-                <table>
-                    <tr>
-                        <td>사용자 ID</td>
-                        <td>
-                            <input id="id" type="text" required>
-                            <button id="id_check" onclick="checkId(id)">ID 중복확인</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>비밀번호</td>
-                        <td>
-                            <input id="pw" type="password" required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>비밀번호 확인</td>
-                        <td>
-                            <input id="pw_check" type="password" required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>성명</td>
-                        <td>
-                            <input id="name" type="text" required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>E-mail</td>
-                        <td>
-                            <input id="email" type="email" required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>우편번호</td>
-                        <td>
-                            <input id="post_num1" type="number" readonly>
-                            -
-                            <input id="post_num2" type="number" readonly>
-                            <button onclick="" id="search_post">우편번호 검색</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>주소</td>
-                        <td>
-                            <input id="addr1" type="text" required><br>
-                            <input id="addr2" type="text"  required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>휴대폰 번호</td>
-                        <td>
-                            <input id="phone1" type="number" maxlength="3" required>
-                            -<input id="phone2" type="number" maxlength="4" required>
-                            -<input id="phone3" type="number" maxlength="4" required>
-                        </td>
-                    </tr>
-                </table>
-                <input type="submit" title="확인">
-            </form>
+
+<head>
+    <title>회원가입</title>
+    <script src="./join.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
+        type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="./styles.css" rel="stylesheet" />
+    <script>
+        function test(){
+            console.log('test' + document.getElementById('name').value);
+
+        }
+    </script>
+</head>
+
+<body>
+        <div class="container">
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">회원가입</h2>
+            <!-- Contact Section Form-->
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-xl-7">
+                        <!-- 아이디 -->
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="userId" oninput="focusId()" type="text" placeholder="ID를 입력하세요" required/>
+                            <label for="userId">사용자ID</label>
+                            <button class="btn btn-primary btn-xl" id="zipcodeBtn" onclick="checkId()">ID 중복검사</button>
+                            <div class="invalid-feedback" id="checkId">ID를 입력하세요</div>
+                            <!-- <button class="btn btn-primary btn-xl" id="idCheckBtn" onclick="checkId()">ID 중복확인</button> -->
+            
+                        </div>
+                        <!-- 비밀번호 -->
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="pw" type="password" oninput="validPw()"
+                                placeholder="4-12자리의 영문, 숫자, 특수문자만 가능" required/>
+                            <label for="pw">비밀번호</label>
+                            <div class="invalid-feedback" id="checkPw">비밀번호를 입력하세요</div>
+                        </div>
+                        <!-- 비밀번호 체크 -->
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="pwCheck" type="password" oninput="checkPw()"
+                                placeholder="4-12자리의 영문, 숫자, 특수문자만 가능" required/>
+                            <label for="pwCheck">비밀번호 확인</label>
+                            <div class="invalid-feedback" id="checkPw2">비밀번호가 일치하지 않습니다</div>
+                        </div>
+                        <!-- 이름 -->
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="name" type="text" placeholder="Enter your name..." oninput="checkName()"
+                                data-sb-validations="required" required/>
+                            <label for="name">성명</label>
+                            <div class="invalid-feedback" id="checkName">이름에는 공백이 없어야 합니다</div>
+                        </div>                     
+                        <!-- 이메일 -->
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="email" type="email" placeholder="name@example.com" oninput="checkEmail()" data-sb-validations="required,email" />
+                            <label for="email">E-mail</label>
+                            <div class="invalid-feedback" id="checkEmail">이메일 형식이 올바르지 않습니다</div>
+                        </div>
+                        <!-- 우편번호 -->
+                        <div class="form-floating mb-3">
+                            <input class="form-control" name="zipcode" id="zipcode" type="text" placeholder="우편번호를 입력하세요." data-sb-validations="required,email" readonly required/>
+                                <button class="btn btn-primary btn-xl" id="zipcodeBtn" onclick="kakaopost()">우편번호 검색</button>
+                            <label for="zipcode">우편번호</label>
+                        </div>
+                        <!-- 주소 -->
+                        <div class="form-floating mb-3">
+                            <input class="form-control" name="address" id="address" type="text" placeholder="주소를 입력하세요." data-sb-validations="required,text" required/>
+                            <label for="address">주소</label>
+                        </div>
+                        <!-- 폰번호 -->
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="phone" type="tel" oninput="checkPhone()" placeholder="(123) 456-7890" data-sb-validations="required" required/>
+                            <label for="phone">휴대폰 번호</label>
+                            <div class="invalid-feedback" id="checkPhone">휴대폰 번호가 올바르지 않습니다</div>
+                        </div>
+                        <button class="btn btn-primary btn-xl" id="submitButton" type="submit">다음</button>
+                </div>
+            </div>
         </div>
-    </body>
+    
+</body>
+
 </html>
