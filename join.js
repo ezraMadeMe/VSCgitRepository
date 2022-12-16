@@ -1,6 +1,9 @@
 // ID 입력 안내 메시지
 //document.getElementById('userId').addEventListener('focus', focusId);
 
+var checkIdBtn = document.getElementById('checkIdBtn').display
+checkIdBtn.disabled = true;
+
 function focusId(){
     var element = document.getElementById('userId');
     var msg = document.getElementById('checkId');
@@ -8,15 +11,30 @@ function focusId(){
 
     if(userId==''){
         msg.style.display = 'block';
+        checkIdBtn.disabled = true;
     }else{
         msg.style.display = 'none';
+        checkIdBtn.disabled = false;
     }
 }
 
 //ID 중복검사
-function checkId(){
-    alert('사용 가능한 아이디입니다');
-}
+// function checkId(userId){
+
+//     if(userId != ''){
+//         window.location.href = 'checkId.php?id='+userId;
+//     }else{
+//         msg.style.display = 'block';
+//     }
+
+//     // var userId = document.getElementById('userId').value;
+// 	// if(userId)  //userid로 받음
+// 	// {
+// 	// 	url = "checkId.php?userid="+userId;
+// 	// } else {
+// 	// 	alert("아이디를 입력하세요.");
+// 	// }
+// }
 
 // PW 유효성 검사
 function validPw(){
@@ -30,7 +48,7 @@ function validPw(){
     }else if(length > 12){
         msg.style.display = 'block';
         msg.innerHTML = '비밀번호가 너무 깁니다';
-    }else if(/[^a-zA-Z\!\@\$\%\^\&\*]/g.test(pw)){
+    }else if(/[^a-zA-Z0-9\!\@\$\%\^\&\*]/g.test(pw)){
         msg.style.display = 'block';
         msg.innerHTML = '비밀번호에 허용되지 않는 문자가 있습니다';
     }else{
